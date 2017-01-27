@@ -1,8 +1,42 @@
 body {
-  padding: 50px;
+  margin: 0;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
 }
 
 a {
-  color: #00B7FF;
+  color: #DDDDDD;
+  text-decoration: none;
+}
+
+#container {
+  width: 800px;
+  margin: 0 auto;
+}
+
+#header {
+  margin-top: 10px;
+}
+
+#header #logo {
+  padding: 10px;
+  background: #0088CC;
+  display: inline-block;
+  color: #FFF;
+}
+
+#navigation {
+  float: right;
+  margin-top: 10px;
+}
+
+#navigation a {
+  margin-left: 10px;
+  padding: 5px 10px;
+  border-radius: 3px;
+}
+
+#navigation a:hover {
+  color: #FFF;
+  background: #0088CC;
+  padding: 5px 10px;
 }
