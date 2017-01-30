@@ -23,6 +23,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static(path.join(__dirname, 'app')));
 
 var jwt    = require('jsonwebtoken'); // used to create, sign, and verify tokens
 var config = require('./config'); // get our config file
@@ -34,6 +35,10 @@ app.set('appSecret', config.secret); // secret variable
 app.set('tokenExpiry', config.tokenExpiry); // secret variable
 
 require('./routes')(app);
+
+app.get('*', function(req, res) {
+    res.render('index', {title: 'TEST'});
+});
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
