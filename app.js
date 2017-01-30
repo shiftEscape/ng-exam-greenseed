@@ -27,32 +27,13 @@ app.use(express.static(path.join(__dirname, 'public')));
 var jwt    = require('jsonwebtoken'); // used to create, sign, and verify tokens
 var config = require('./config'); // get our config file
 var User   = require('./models/user'); // get our mongoose model
+var crypto = require('crypto');
 
 mongoose.connect(config.database); // connect to database
 app.set('appSecret', config.secret); // secret variable
+app.set('tokenExpiry', config.tokenExpiry); // secret variable
 
 require('./routes')(app);
-
-app.get('/setup', function(req, res) {
-
-  // create a sample user
-  var nick = new User({ 
-    username: 'shiftescape',
-    first_name: 'Alvin James', 
-    last_name: 'Bellero',
-    password: 'password',
-    email: 'ajames.bellero@gmail.com'
-  });
-
-  // save the sample user
-  nick.save(function(err) {
-    if (err) throw err;
-
-    console.log('User saved successfully');
-    res.json({ success: true });
-  });
-});
-
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
