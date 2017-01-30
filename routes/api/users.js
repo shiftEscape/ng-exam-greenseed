@@ -13,22 +13,22 @@ module.exports = function(app, middleware) {
     };
 
     getAllUsers = function(req, res) {
-        User.model.find({}, function(err, users) {
+        User.model.find({}, '-salt -password', function(err, users) {
             res.json(users);
         });
     };
 
     getUser = function(req, res) {
-        User.model.find({_id: req.params.id}, function(err, user) {
+        User.model.find({_id: req.params.id}, '-salt -password', function(err, user) {
             if(err) {
-                res.status(400).json({success: false, message: err})
+                res.status(400).json({success: false, message: err, data: []})
             } else {
                 res.status(200).json({success: true, data: user});
             }
         });
     };
     
-    app.post('/api/users', [middleware.auth.requireToken], createUser);
+    app.post('/api/users', createUser);
     app.get('/api/users', [middleware.auth.requireToken], getAllUsers);
     app.get('/api/users/:id', [middleware.auth.requireToken], getUser);
 };

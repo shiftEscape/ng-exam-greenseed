@@ -13,7 +13,6 @@ module.exports = function(app) {
       return require("./api/" + file)(app, middleware);
     }
   });
-
 };
 
 /* GET home page. */

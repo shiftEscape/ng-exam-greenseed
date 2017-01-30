@@ -15,16 +15,13 @@ module.exports = function(app, middleware) {
                 res.status(401).json({ success: false, message: 'Authentication failed. User not found.' });
             } else if (user) {
                 if (!user.validatePassword(req.body.password)) {
-                    res.status(401).json({ success: false, message: 'Authentication failed. Wrong password.' });
+                    res.status(401).json({ success: false, message: 'Authentication failed. Wrong username or password.' });
                 } else {
-
                     var token = jwt.sign(user, app.get('appSecret'), {
                         expiresIn: app.get('tokenExpiry')
                     });
-
                     res.json({ success: true, token: token });
                 }   
-
             }
         });
     }
