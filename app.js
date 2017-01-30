@@ -4,9 +4,11 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
+var mongoose = require('mongoose');
 
-var index = require('./routes/index');
-var users = require('./routes/users');
+// var index = require('./routes/index');
+// var users = require('./routes/users');
+// var authenticate = require('./routes/authenticate');
 
 var app = express();
 
@@ -22,8 +24,35 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use('/', index);
-app.use('/users', users);
+var jwt    = require('jsonwebtoken'); // used to create, sign, and verify tokens
+var config = require('./config'); // get our config file
+var User   = require('./models/user'); // get our mongoose model
+
+mongoose.connect(config.database); // connect to database
+app.set('appSecret', config.secret); // secret variable
+
+require('./routes')(app);
+
+app.get('/setup', function(req, res) {
+
+  // create a sample user
+  var nick = new User({ 
+    username: 'shiftescape',
+    first_name: 'Alvin James', 
+    last_name: 'Bellero',
+    password: 'password',
+    email: 'ajames.bellero@gmail.com'
+  });
+
+  // save the sample user
+  nick.save(function(err) {
+    if (err) throw err;
+
+    console.log('User saved successfully');
+    res.json({ success: true });
+  });
+});
+
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
