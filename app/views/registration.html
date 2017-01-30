@@ -1,0 +1,45 @@
+<div style="margin:0 auto; width: 500px; padding: 20px; background: #FFF;">
+    <h2 style="margin-top: 0">Green Seed Exam - Register</h2>
+    <form name="form" ng-submit="form.$valid && vm.register()" novalidate>
+        <div ng-if="vm.error" class="alert alert-danger">{{vm.error}}</div>
+        <div class="form-group" ng-class="{ 'has-error': form.$submitted && form.username.$invalid }">
+            <label for="username">Username</label>
+            <input type="text" placeholder="Username.." name="username" class="form-control" ng-model="vm.username" required />
+            <div ng-messages="form.$submitted && form.username.$error" class="help-block">
+                <div ng-message="required">Username is required</div>
+            </div>
+        </div>
+        <div class="form-group" ng-class="{ 'has-error': form.$submitted && form.first_name.$invalid }">
+            <label for="first_name">First Name</label>
+            <input type="text" placeholder="First Name.." name="first_name" class="form-control" ng-model="vm.first_name" required />
+            <div ng-messages="form.$submitted && form.first_name.$error" class="help-block">
+                <div ng-message="required">First Name is required</div>
+            </div>
+        </div>
+        <div class="form-group" ng-class="{ 'has-error': form.$submitted && form.last_name.$invalid }">
+            <label for="last_name">Last Name</label>
+            <input type="text" placeholder="Last Name.." name="last_name" class="form-control" ng-model="vm.last_name" required />
+            <div ng-messages="form.$submitted && form.last_name.$error" class="help-block">
+                <div ng-message="required">Last Name is required</div>
+            </div>
+        </div>
+        <div class="form-group" ng-class="{ 'has-error': form.$submitted && form.email.$invalid }">
+            <label for="email">Email</label>
+            <input type="text" placeholder="email.." name="email" class="form-control" ng-model="vm.email" required />
+            <div ng-messages="form.$submitted && form.email.$error" class="help-block">
+                <div ng-message="required">Email is required</div>
+            </div>
+        </div>
+        <div class="form-group" ng-class="{ 'has-error': form.$submitted && form.password.$invalid }">
+            <label for="password">Password</label>
+            <input type="password" placeholder="Password.." name="password" class="form-control" ng-model="vm.password" required />
+            <div ng-messages="form.$submitted && form.password.$error" class="help-block">
+                <div ng-message="required">Password is required</div>
+            </div>
+        </div>
+        <div class="form-group">
+            <button ng-disabled="vm.loading" class="btn btn-success btn-block">Create Account</button>
+            <a ng-disabled="vm.loading" href="#/login" class="btn btn-warning btn-block">Login existing User</a>
+        </div>
+    </form>
+</div>

@@ -1,0 +1,33 @@
+<div id="container">
+    <div id="header">
+    <div id="logo">{{ vm.title }}</div>
+    <div id="navigation">
+        <a href="#" class="active">Home</a>
+        <a href="#" ng-click="vm.logout()">Logout</a>
+    </div>
+    </div>
+    <div id="content">
+        <h3 style="padding: 0 8px">List of Users</h3>
+        <div class="alert alert-danger" ng-if="vm.hasError" style="margin: 10px;">{{ vm.error }}</div>
+        <table class="table table-hover" ng-if="vm.users.length > 0">
+            <tr>
+                <th>Username</th>
+                <th>First Name</th>
+                <th>Last Name</th>
+                <th>Email</th>
+            </tr>
+            <tr title="Click to view {{user.first_name}}'s record.." ng-repeat="user in vm.users" ng-click="vm.viewUser(user._id)" style="cursor: pointer">
+                <td>{{ user.username }}</td>
+                <td>{{ user.first_name }}</td>
+                <td>{{ user.last_name }}</td>
+                <td>{{ user.email }}</td>
+            </tr>
+        </table>
+    </div>
+    <div id="footer">
+        Copyright &copy; 
+        <a href="https://github.com/shiftescape" target="_blank" title="Shameless Plugin">Alvin James Bellero</a>
+        |
+        <a href="https://www.npmjs.com/~shiftescape" title="Shameless Plugin">NPM</a>
+    </div>
+</div>
