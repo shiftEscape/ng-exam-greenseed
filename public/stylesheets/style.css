@@ -6,7 +6,7 @@ body {
 
 a {
   color: #DDDDDD;
-  text-decoration: none;
+  text-decoration: none !important;
 }
 
 #container {
@@ -24,6 +24,7 @@ a {
 #header #logo {
   padding: 10px;
   display: inline-block;
+  font-weight: bold;
   font-size: 1.3em;
   color: #FFF;
 }
@@ -45,4 +46,11 @@ a {
   color: #FFF;
   background: #0076B1;
   padding: 5px 10px;
+}
+
+#footer {
+  padding: 10px;
+  text-align: right;
+  background: #0088CC;
+  color: #FFF;
 }
